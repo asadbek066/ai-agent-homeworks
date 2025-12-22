@@ -126,13 +126,12 @@ class Agent:
 
     def ask(self, text):
         response = self.chat.send_message(text)
-
-        part = response.candidates[0].content.parts[0]
-
-        if part.function_call:
+        candidate = response.candidates[0]
+        content = candidate.content
+        if content and content.parts and content.parts[0].function_call:
+            part = content.parts[0]
             name = part.function_call.name
             args = part.function_call.args
-
             if name == "add":
                 result = add(**args)
             elif name == "mul":
@@ -143,9 +142,11 @@ class Agent:
                 result = divide(**args)
             elif name == "count_factors":
                 result = count_factors(**args)
-            else:result = ""
-            reply = self.chat.send_message(str(result)).text
+            else:
+                result = ""
 
+            tool_response = self.chat.send_message(str(result))
+            reply = tool_response.candidates[0].content.parts[0].text
         else:
             reply = response.text
 
