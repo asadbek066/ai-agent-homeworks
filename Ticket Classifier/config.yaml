@@ -1,0 +1,29 @@
+categories:
+  - Billing & Payments
+  - Account Access Issues
+  - Technical Problems
+  - Feature Requests
+  - Product Usage Questions
+  - Security Concerns
+  - Cancellations & Refunds
+  - Other / Needs Review
+
+queue_map:
+  Billing & Payments: billing-queue
+  Account Access Issues: account-ops
+  Technical Problems: tech-support
+  Feature Requests: product-team
+  Product Usage Questions: support-general
+  Security Concerns: security-ops
+  Cancellations & Refunds: refunds
+  Other / Needs Review: triage
+
+rules:
+  forced_human_review_categories:
+    - Security Concerns
+  confidence_threshold: 0.65
+  enterprise_confidence_boost: 0.1
+
+ollama:
+  model: deepseek-r1:1.5b
+  api_url: http://localhost:11434/api/generate
