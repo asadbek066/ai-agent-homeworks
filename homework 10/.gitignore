@@ -1,0 +1,12 @@
+__pycache__/
+venv/
+.env
+.env.*
+.huggingface/
+hf_cache/
+transformers_cache/
+*.csv
+*.db
+*.sqlite
+*.sqlite3
+*.key
